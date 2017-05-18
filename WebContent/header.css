@@ -1,0 +1,18 @@
+@CHARSET "UTF-8";
+.fontismrbedfort{
+		font-family: 'Mr Bedfort', cursive;
+	}
+	.navbarsbackcolor{
+		  background-color: #1b1b1b;
+		  background-image: -moz-linear-gradient(top, #7fff00, #7cfc00);
+		  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#7fff00), to(#7cfc00));
+		  background-image: -webkit-linear-gradient(top, #7fff00, #7cfc00);
+		  background-image: -o-linear-gradient(top, #7fff00, #7cfc00);
+		  background-image: linear-gradient(to bottom, #7fff00, #7cfc00);
+		  background-repeat: repeat-x;
+		  border-color: #252525;
+		  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#7fff00', endColorstr='#7cfc00', GradientType=0);
+	}
+	.fontcoloriswhite{
+		font-color: white;
+	}

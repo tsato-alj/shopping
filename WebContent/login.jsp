@@ -1,27 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		<title>ショッピングサイトへようこそ!</title>
-		<style>
-			<%@include file="shopping.css" %>
-		</style>
-	</head>
-	<body>
-		<div id="main">
-			<h1>ログイン画面へようこそ!</h1>
-			<p>ログインIDとパスワードを入力して下さい</p>
-			<form action="login" method="get">
-				<p>userID<input type="text" name="id" value=""/></p>
-				<p>パスワード<input type="password" name="pass" value=""/></p>
-				<p><button type="submit" name="choice" value="login">ログイン</button>
-				<% if(session.getAttribute("userId") != null) { %>
-					<button type="submit" name="choice" value="logout">ログアウト</button>
-				<% }%>
-			</form>
-		</div>
-	</body>
-</html>
+    pageEncoding="UTF-8"
+%>
+	<div id="logbox">
+		<% if(session.getAttribute("userId") != null) { %>
+			<h1 class="text-center">ようこそ、<%=session.getAttribute("userName")%>さん</h1>
+				<div class="list-group">
+					<a href="login?choice=history" class="list-group-item textcenter">購入履歴</a>
+					<a href="login?choice=logout" class="list-group-item textcenter">ログアウト</a>
+
+				</div>
+		<% }else{%>
+				<form id="signup" method="post" action="login">
+					<h1>account login</h1>
+					<input name="id" type="text" placeholder="ID" class="input pass"/>
+					<input name="pass" type="password" placeholder="Password" required="required" class="input pass"/>
+					<button type="submit" name="choice" value="login" class="inputButton">Login</button>
+				</form>
+				<div class="text-center">
+			    	<a href="#" id="">create an account</a> - <a href="#" id="">forgot password</a>
+			    </div>
+		<%} %>
+	</div>

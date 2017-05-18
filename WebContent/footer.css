@@ -1,0 +1,46 @@
+/* Footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+#footer {
+  height: 50px;
+  margin-top: -50px;
+  width: 100%;
+  marigin-bottom :0px;
+  padding-bottom: 0px;
+  bottom: 0;
+  position: fixed;
+}
+.footerbackground{
+	background-color: #1b1b1b;
+  background-image: -moz-linear-gradient(top, #7fff00, #7cfc00);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#7fff00), to(#7cfc00));
+  background-image: -webkit-linear-gradient(top, #7fff00, #7cfc00);
+  background-image: -o-linear-gradient(top, #7fff00, #7cfc00);
+  background-image: linear-gradient(to bottom, #7fff00, #7cfc00);
+  background-repeat: repeat-x;
+  border-color: #252525;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#7fff00', endColorstr='#7cfc00', GradientType=0);
+}
+
+
+/* Custom footer CSS
+-------------------------------------------------- */
+
+.container {
+  width: auto;
+  max-width: 680px;
+  padding: 0 15px;
+}
+.container .text-muted {
+  margin: 20px 0;
+}
+.footertext {
+  color: #ffffff;
+}
