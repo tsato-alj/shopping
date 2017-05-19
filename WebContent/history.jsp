@@ -18,7 +18,7 @@
 		<title>購入履歴</title>
 	</head>
 	<body>
-		<jsp:include page="header.jsp"/>
+		<jsp:include page="vegetalianHeader.jsp"/>
 		<div id="main">
 			<h1><%=userName %>さんの購入確認</h1>
 			<table>

@@ -10,14 +10,23 @@ import dao.ShoppingDao;
 public class Shopping {
 
 	public static ArrayList<ItemBean> getItem() throws ClassNotFoundException, SQLException{
-		return new ShoppingDao().selectItem();
+		ShoppingDao shopping = new ShoppingDao();
+		ArrayList<ItemBean> itemList = shopping.selectItem();
+		shopping.close();
+		return itemList;
 	}
 
 	public static ItemBean getItem(String itemId) throws ClassNotFoundException, SQLException{
-		return new ShoppingDao().selectItem(itemId);
+		ShoppingDao shopping = new ShoppingDao();
+		ItemBean item = shopping.selectItem(itemId);
+		shopping.close();
+		return item;
 	}
 
 	public static ArrayList<HistoryBean> getHistory(String userId) throws ClassNotFoundException, SQLException{
-		return new ShoppingDao().getHistory(userId);
+		ShoppingDao shopping = new ShoppingDao();
+		ArrayList<HistoryBean> historyList = shopping.getHistory(userId);
+		shopping.close();
+		return historyList;
 	}
 }

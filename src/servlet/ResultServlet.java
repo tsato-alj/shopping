@@ -46,6 +46,7 @@ public class ResultServlet extends HttpServlet {
 			HttpSession session = request.getSession(true);
 			String userId = (String)session.getAttribute("userId");
 			shoppingDao.updateHistory(userId, item.getItemId(), quantity);
+			shoppingDao.close();
 			ServletContext context = getServletContext();
 			RequestDispatcher rd = context.getRequestDispatcher("/result.jsp");
 			rd.forward(request, response);

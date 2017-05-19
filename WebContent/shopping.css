@@ -11,13 +11,30 @@ body {
   padding-bottom: 0px;
 }
 
+hr {
+	height:3px;
+	border:0;
+	background:linear-gradient(left, #f5f5f5, #999, #f5f5f5);
+	background:-webkit-linear-gradient(left, #f5f5f5, #999, #f5f5f5);
+	background:-moz-linear-gradient(left, #f5f5f5, #999, #f5f5f5);
+}
+
+
 body, html{
 	height: 100%;
+	width: 100%
 }
 
 .maincontent {
-  padding: 20px;
-  padding-bottom: 50px;
-  height: auto;
-  position: relative;
+  width: 100%;
+  margin: 0px;
+}
+
+.width100margin0{
+	width: 100%;
+	margin: 0px;
+}
+
+textcenter{
+	text-align:center;
 }

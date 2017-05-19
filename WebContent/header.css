@@ -16,3 +16,15 @@
 	.fontcoloriswhite{
 		font-color: white;
 	}
+
+.navswidth{
+	width:80%;
+	margin: 0 auto;
+}
+h1{
+	font-size: 200px;
+	font-color: 000;
+}
+.goto{
+	margin-right: 135.906px;
+}

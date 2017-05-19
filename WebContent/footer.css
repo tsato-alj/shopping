@@ -33,14 +33,8 @@ body {
 /* Custom footer CSS
 -------------------------------------------------- */
 
-.container {
-  width: auto;
-  max-width: 680px;
-  padding: 0 15px;
-}
-.container .text-muted {
-  margin: 20px 0;
-}
+
+
 .footertext {
   color: #ffffff;
 }

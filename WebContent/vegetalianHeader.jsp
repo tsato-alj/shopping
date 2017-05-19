@@ -1,8 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="bean.LoginUserBean" %>
-<nav class="navbar navbar-default navbar-fixed-top navbarsbackcolor">
-  <div class="container-fluid">
+
+<h1 class="fontismrbedfort textcenter h1">ProuVege For Vegetalian</h1>
+<p class="fontismrbedfort textcenter">Proud to be Vegetalian</p>
+<a class="fontismrbedfort pull-right goto">Go to "For Producer"</a>
+<br/>
+<nav class="navbar navbar-default navbarsbackcolor navswidth">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -11,7 +15,6 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand fontismrbedfort fontcoloriswhite" href="#">JapaVege</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -86,5 +89,4 @@
         </li>
       </ul>
     </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
 </nav>

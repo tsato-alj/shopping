@@ -7,6 +7,8 @@ import dao.LoginDao;
 
 public class Login {
 	public static LoginUserBean loginCheck(String id, String pass) throws ClassNotFoundException, SQLException{
-		return new LoginDao().selectUser(id, pass);
+		LoginDao login = new LoginDao();
+		LoginUserBean user = login.selectUser(id, pass);
+		return user;
 	}
 }

@@ -19,7 +19,7 @@
 	<title>購入確認</title>
 	</head>
 	<body>
-		<jsp:include page="header.jsp"/>
+		<jsp:include page="vegetalianHeader.jsp"/>
 		<div id="main">
 			<h1>商品一覧</h1>
 			<p>つぎの商品を購入しますか?</p>

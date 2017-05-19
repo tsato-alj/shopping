@@ -5,29 +5,25 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		<title>ショッピングサイトへようこそ!</title>
+		<title>ProuVege For Vegetalian</title>
 		<%@ include file="head.html" %>
 		<link rel="stylesheet" type="text/css" href="header.css">
-
 		<link rel="stylesheet" type="text/css" href="login.css">
-		<link rel="stylesheet" type="text/css" href="shopping.css">
 		<link rel="stylesheet" type="text/css" href="footer.css">
+		<link rel="stylesheet" type="text/css" href="shopping.css">
 
 	</head>
 	<body>
-		<div class="maincontent">
-			<%@include file="header.jsp" %>
-			<div class="container">
-				<div class="row">
-					<div class="col-md-8">
-					</div>
-		   			<div class="col-md-4">
-		    			<%@include file="login.jsp" %>
-		    		</div>
-	    		</div>
+		<%@include file="vegetalianHeader.jsp"%>
+		<div class="container maincontent">
+			<div class="row width100margin0">
+				<div class="col-md-8">
+
+				</div>
+				<div class="col-md-4">
+					<jsp:include page="login.jsp" />
+				</div>
 			</div>
 		</div>
 		<%@include file="footer.html" %>
-		<%@include file="script.html" %>
-	</body>
 </html>

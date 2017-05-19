@@ -16,7 +16,7 @@
 	<title>商品一覧</title>
 	</head>
 	<body>
-		<jsp:include page="header.jsp"/>
+		<jsp:include page="vegetalianHeader.jsp"/>
 		<div id="main">
 			<h1>商品一覧</h1>
 			<table>
