@@ -21,15 +21,10 @@
 
 			<div id="logbox">
 				<%
-					String preChoice = null;
 					String mode = null;
-					if(request.getAttribute("sellingChoice") != null){
-						preChoice = (String)request.getAttribute("sellingChoice");
-						mode = "producer";
+					if(session.getAttribute("mode") != null){
+						mode = (String)session.getAttribute("mode");
 						request.setAttribute("mode", mode);
-					}else if(request.getAttribute("vegetalianChoice") != null){
-						preChoice = (String)request.getAttribute("vegetalianChoice");
-						mode = "producer";
 					}
 				%>
 
@@ -37,8 +32,7 @@
 					<h1>account login</h1>
 					<input name="id" type="text" placeholder="ID" class="input pass"/>
 					<input name="pass" type="password" placeholder="Password" required="required" class="input pass"/>
-					<input name="nextUrlsChoice" type="hidden" value="<%=preChoice %>"/>
-					<input name="mode" type="hidden" value="<%=mode %>">
+					<input name="mode" type="hidden" value="<%=mode %>"/>
 					<button type="submit" class="inputButton">Login</button>
 				</form>
 				<div class="text-center">

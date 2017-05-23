@@ -41,11 +41,11 @@ public class NeedLoginServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//リクエスト処理
-				HttpSession session = null;
+				HttpSession session = request.getSession(true);
 				request.setCharacterEncoding("UTF-8");
-				String nextUrlsChoice = request.getParameter("nextUrlsChoice");
+				String mode = (String)session.getAttribute("mode");
 				try{
-					if(nextUrlsChoice != null){
+					if(mode != null){
 						//ログインボタンが押された場合
 						String id = request.getParameter("id");
 						String pass = request.getParameter("pass");
@@ -58,19 +58,9 @@ public class NeedLoginServlet extends HttpServlet {
 							String userName = userBean.getName();
 							session.setAttribute("userName", userName);
 							session.setAttribute("userId", id);
-							String nextUrl = null;
-							String mode = (String)request.getParameter("mode");
-							if(mode.equals("producer")){
-								ServletContext context = getServletContext();
-								nextUrl = "/selling?choice=" + nextUrlsChoice;
-								RequestDispatcher rd = context.getRequestDispatcher(nextUrl);
-								rd.forward(request, response);
-							}else if(mode.equals("vegetalian")){
-								ServletContext context = getServletContext();
-								nextUrl = "/shopping?choice=" + nextUrlsChoice;
-								RequestDispatcher rd = context.getRequestDispatcher(nextUrl);
-								rd.forward(request, response);
-							}
+							ServletContext context = getServletContext();;
+							RequestDispatcher rd = context.getRequestDispatcher(mode);
+							rd.forward(request, response);
 						} else {
 							//NGの場合
 							ServletContext context = getServletContext();

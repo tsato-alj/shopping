@@ -40,17 +40,18 @@ public class SellingServlet extends HttpServlet {
 		HttpSession session = request.getSession(true);
 
 		request.setCharacterEncoding("UTF-8");
-		String choice = request.getParameter("choice");
+		String mode = request.getParameter("mode");
 		if(session.getAttribute("userId") != null){
-			if(choice != null){
-				if(choice.equals("recordItem")){
+			if(mode != null){
+				if(mode.equals("/selling/recordItem")){
+					session.setAttribute("mode", mode);
 					ServletContext context = getServletContext();
 					RequestDispatcher rd = context.getRequestDispatcher("/recordItem.jsp");
 					rd.forward(request, response);
 				}
 			}
-		}else {
-			request.setAttribute("sellingChoice", choice);
+		}else if(mode != null){
+			session.setAttribute("mode", mode);
 			ServletContext context = getServletContext();
 			RequestDispatcher rd = context.getRequestDispatcher("/needLogin.jsp");
 			rd.forward(request, response);

@@ -5,20 +5,20 @@
   font-size: 45px;
 }
 
-.section-content{
+.record-content{
   text-align: center;
 
 }
-#contact{
+#record{
 
   padding-top: 60px;
   width: 100%;
   height: 550px;
 }
-.contact-section{
+.record-section{
   padding-top: 40px;
 }
-.contact-section .col-md-6{
+.record-section .col-md-6{
   width: 50%;
 }
 
@@ -55,4 +55,10 @@ textarea.form-control {
 
 .formlist{
 	width: 100%;
+}
+.file-photo {
+  color: white;
+  background-color: red;
+  padding: 6px;
+  border-radius: 12px;
 }
