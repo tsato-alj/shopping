@@ -11,7 +11,6 @@
 		<link rel="stylesheet" type="text/css" href="login.css">
 		<link rel="stylesheet" type="text/css" href="footer.css">
 		<link rel="stylesheet" type="text/css" href="shopping.css">
-
 	</head>
 	<body>
 		<%@include file="producerHeader.jsp"%>

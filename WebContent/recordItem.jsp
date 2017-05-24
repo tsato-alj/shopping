@@ -26,7 +26,7 @@
 								</div>
 								<div class="record-section">
 								<div class="container formlist">
-									<form class="center-block" method="post" action="confirmrecorditem" enctype="multipart/form-data">
+									<form class="center-block" method="post" action="confirmrecorditem">
 										<div class="col-md-6 form-line">
 											<div class="form-group" >
 
@@ -54,20 +54,9 @@
 										    	</div>
 										  	</div>
 								  		</div>
-								  		<div class="col-md-6">
-								  			<div class="form-group">
-								  				<label for ="item-description">Description</label>
-								  			 	<textarea  class="form-control" id="description" name="description" placeholder="Please enter the item-descpription"></textarea>
-								  			</div>
-								  			<div class="form-group">
-										    	<label for="image">Image</label>
-										    	<p><label id="image" for="file_photo" class="btn btn-default" >select images<input type="file" accept="image/*" id="file_photo" style="display:none;" name="image"></label></p>
-										  	</div>
 								  			<div>
-								  				<button type="submit" class="btn btn-default submit"><i class="fa fa-paper-plane" aria-hidden="true"></i>  Send Message</button>
+								  				<button type="submit" class="btn btn-default submit"><i class="fa fa-paper-plane" aria-hidden="true"></i>  Submit</button>
 								  			</div>
-
-										</div>
 									</form>
 								</div>
 							</section>
@@ -78,4 +67,5 @@
 			</div>
 		</div>
 		<%@include file="footer.html" %>
+		<%@include file="script.html" %>
 </html>

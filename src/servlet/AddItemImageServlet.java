@@ -1,27 +1,32 @@
 package servlet;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
+
+import common.Selling;
 
 /**
- * Servlet implementation class SellingServlet
+ * Servlet implementation class AddDescriptionServlet
  */
-@WebServlet("/selling")
-public class SellingServlet extends HttpServlet {
+@WebServlet("/additemimage")
+@MultipartConfig(location="C:/pleiades/workspace/shopping/WebContent/item-image")
+public class AddItemImageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SellingServlet() {
+    public AddItemImageServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,29 +42,22 @@ public class SellingServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession(true);
-		String mode = null;
-
 		request.setCharacterEncoding("UTF-8");
-		if(session.getAttribute("mode") != null){
-			mode = (String)session.getAttribute("mode");
-		}else{
-			mode = request.getParameter("mode");
+		String itemId = request.getParameter("itemId");
+		Part image = request.getPart("image");
+		String fileName = itemId + image.getSubmittedFileName();
+		image.write(fileName);
+		String imageUrl = "C:/pleiades/workspace/shopping/WebContent/item-image/" + fileName;
+		try {
+			Selling.addItemImage(imageUrl, itemId);
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
 		}
-		if(session.getAttribute("userId") != null){
-			if(mode != null){
-				if(mode.equals("/selling?mode=recordItem")){
-					ServletContext context = getServletContext();
-					RequestDispatcher rd = context.getRequestDispatcher("/recordItem.jsp");
-					rd.forward(request, response);
-				}
-			}
-		}else if(mode != null){
-			session.setAttribute("mode", mode);
-			ServletContext context = getServletContext();
-			RequestDispatcher rd = context.getRequestDispatcher("/needLogin.jsp");
-			rd.forward(request, response);
-		}
+		request.setAttribute("itemId", itemId);
+		ServletContext context = getServletContext();
+		RequestDispatcher rd = context.getRequestDispatcher("/addDescription.jsp");
+		rd.forward(request, response);
 	}
 
 }

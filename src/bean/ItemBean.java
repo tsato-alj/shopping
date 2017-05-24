@@ -7,6 +7,24 @@ public class ItemBean implements Serializable{
 	private String itemName;
 	private int itemPrice;
 	private int itemQuantity;
+	private String image;
+	private String description;
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
 	public String getItemId() {
 		return itemId;
 	}

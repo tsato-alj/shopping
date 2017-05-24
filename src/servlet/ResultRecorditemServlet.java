@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -11,17 +12,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import common.Selling;
+
 /**
- * Servlet implementation class SellingServlet
+ * Servlet implementation class ResultRecorditemServlet
  */
-@WebServlet("/selling")
-public class SellingServlet extends HttpServlet {
+@WebServlet("/resultrecorditem")
+public class ResultRecorditemServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SellingServlet() {
+    public ResultRecorditemServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,29 +40,23 @@ public class SellingServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");String itemId = request.getParameter("itemId");
+		String itemName = request.getParameter("itemName");
 		HttpSession session = request.getSession(true);
-		String mode = null;
+		int price = Integer.parseInt(request.getParameter("price"));
+		String producerId = (String)session.getAttribute("userId");
+		String category = request.getParameter("category");
+		try {
+			Selling.recordItem(itemId, itemName, price, producerId, category);
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
+		request.setAttribute("itemId", itemId);
+		ServletContext context = getServletContext();
+		RequestDispatcher rd = context.getRequestDispatcher("/addItemImage.jsp");
+		rd.forward(request, response);
 
-		request.setCharacterEncoding("UTF-8");
-		if(session.getAttribute("mode") != null){
-			mode = (String)session.getAttribute("mode");
-		}else{
-			mode = request.getParameter("mode");
-		}
-		if(session.getAttribute("userId") != null){
-			if(mode != null){
-				if(mode.equals("/selling?mode=recordItem")){
-					ServletContext context = getServletContext();
-					RequestDispatcher rd = context.getRequestDispatcher("/recordItem.jsp");
-					rd.forward(request, response);
-				}
-			}
-		}else if(mode != null){
-			session.setAttribute("mode", mode);
-			ServletContext context = getServletContext();
-			RequestDispatcher rd = context.getRequestDispatcher("/needLogin.jsp");
-			rd.forward(request, response);
-		}
 	}
 
 }

@@ -1,18 +1,14 @@
 package servlet;
 
 import java.io.IOException;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Optional;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import javax.servlet.http.Part;
 
 /**
  * Servlet implementation class ConfirmRecordItemServlet
@@ -40,28 +36,17 @@ public class ConfirmRecordItemServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
 		String itemId = request.getParameter("itemId");
-		System.out.println(itemId);
+		request.setAttribute("itemId", itemId);
 		String itemName = request.getParameter("itemName");
-		System.out.println(itemName);
-		System.out.println(request.getParameter("price"));
-		int price = Integer.parseInt(request.getParameter("price"));
-		HttpSession session = request.getSession(true);
-		String producerId = (String)session.getAttribute("userId");
-		String itemDescription = request.getParameter("item-description");
-
-		Part image = request.getPart("image");
-		final ZoneId HERE = ZoneId.of("Asia/Tokyo");
-		DateTimeFormatter PATTERN = DateTimeFormatter.ofPattern("uuuu-MM-dd-HH-mm-ss-SSS");
-		ZonedDateTime now = ZonedDateTime.now(HERE);
-        String fileName = now.format(PATTERN);
-        String extension = Optional.of(image.getSubmittedFileName())
-                .filter(s -> s.length() > 0)
-                .filter(s -> s.contains("."))
-                .map(s -> s.substring(s.lastIndexOf(".")))
-                .orElse("");
-        image.write(fileName + extension);
-
+		request.setAttribute("itemName", itemName);
 		String category = request.getParameter("category");
+		request.setAttribute("category", category);
+		Integer price = Integer.valueOf(request.getParameter("price"));
+		request.setAttribute("price", price);
+		ServletContext context = getServletContext();
+		RequestDispatcher rd = context.getRequestDispatcher("/confirmRecordItem.jsp");
+		rd.forward(request, response);
 	}
 }

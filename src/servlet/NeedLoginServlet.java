@@ -54,7 +54,6 @@ public class NeedLoginServlet extends HttpServlet {
 						//ログインチェック判定
 						if(userBean != null){
 							//OKの場合
-							session = request.getSession(true);
 							String userName = userBean.getName();
 							session.setAttribute("userName", userName);
 							session.setAttribute("userId", id);
