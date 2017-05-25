@@ -60,4 +60,23 @@ public class LoginDao {
 
 		return bean;
 	}
+
+	public void createAnAccount(String userId, String pass, String name, String email) throws SQLException{
+		PreparedStatement pstatement = null;
+		try {
+			// SQLを保持するPreparedStatementオブジェクトの生成
+			String sql = "insert into user (id, pass, name, email) values (?, ?, ?, ?)";
+			pstatement = connection.prepareStatement(sql);
+			// INパラメータの設定
+			pstatement.setString(1, userId);
+			pstatement.setString(2, pass);
+			pstatement.setString(3, name);
+			pstatement.setString(4, email);
+			//SQLの発行
+			pstatement.executeUpdate();
+		} finally {
+			// PreparedStatementオブジェクトの解放
+			pstatement.close();
+		}
+	}
 }

@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -9,19 +10,20 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+
+import common.Login;
 
 /**
- * Servlet implementation class ModeChange
+ * Servlet implementation class ResultCreateAnAccount
  */
-@WebServlet("/modechange")
-public class ModeChange extends HttpServlet {
+@WebServlet("/resultcreateanaccount")
+public class ResultCreateAnAccount extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ModeChange() {
+    public ResultCreateAnAccount() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,7 +32,7 @@ public class ModeChange extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doPost(request,  response);
+		doPost(request, response);
 	}
 
 	/**
@@ -38,20 +40,19 @@ public class ModeChange extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		HttpSession session = request.getSession(true);
-		if(request.getParameter("vegetalianOrProducer") != null){
-			String vegetalianOrProducer = request.getParameter("vegetalianOrProducer");
-			session.setAttribute("vegetalianOrProducer", vegetalianOrProducer);
-			if(request.getParameter("vegetalianOrProducer").equals("vegetalian")){
-				ServletContext context = getServletContext();
-				RequestDispatcher rd = context.getRequestDispatcher("/ForVegetalian.jsp");
-				rd.forward(request, response);
-			}else if(request.getParameter("vegetalianOrProducer").equals("producer")){
-				ServletContext context = getServletContext();
-				RequestDispatcher rd = context.getRequestDispatcher("/ForProducer.jsp");
-				rd.forward(request, response);
-			}
+		String userId = request.getParameter("userId");
+		String pass = request.getParameter("pass");
+		String name = request.getParameter("name");
+		String email = request.getParameter("email");
+		try {
+			Login.createAnAccount(userId, pass, name, email);
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
 		}
+		ServletContext context = getServletContext();
+		RequestDispatcher rd = context.getRequestDispatcher("/welcomeNewAccount.jsp");
+		rd.forward(request, response);
 	}
 
 }

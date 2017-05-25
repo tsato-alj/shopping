@@ -18,7 +18,7 @@
 					<button type="submit" name="choice" value="login" class="inputButton">Login</button>
 				</form>
 				<div class="text-center">
-			    	<a href="#" id="">create an account</a> - <a href="#" id="">forgot password</a>
+			    	<a href="login?choice=createAnAccount">create an account</a> - <a href="#" id="">forgot password</a>
 			    </div>
 		<%} %>
 	</div>

@@ -14,7 +14,7 @@
 		<link rel="stylesheet" type="text/css" href="needLogin.css"/>
 	</head>
 	<body>
-	<%@include file="producerHeader.jsp"%>
+	<%@include file="header.jsp"%>
 	<div class="maincontent">
 		<div class="alert alert-info center-block needlogin text-center">このサービスにはログインが必要です</div>
 

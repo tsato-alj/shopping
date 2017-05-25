@@ -22,6 +22,7 @@
 	<body>
 	 	<div class="maincontent">
 			<div class="col-md-8">
+				<%@include file="header.jsp"%>
 				<div class="center-block">
 					<h3 class="h3">商品登録内容の確認</h3>
 					<p>以下の内容でよろしいでしょうか?</p>

@@ -5,7 +5,7 @@
 
 <h1 class="fontismrbedfort textcenter h1">ProuVege For Producer</h1>
 <p class="fontismrbedfort textcenter">Proud to be Vegetalian</p>
-<p><a class="pull-right goto" href="modechange?mode=producer">Go to "For Producer"</a></p>
+<p><a class="pull-right goto" href="modechange?vegatlianOrProducer=producer">Go to "For Producer"</a></p>
 <br/>
 <nav class="navbar navbar-default navbarsbackcolor navswidth">
     <!-- Brand and toggle get grouped for better mobile display -->

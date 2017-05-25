@@ -88,6 +88,10 @@ public class LoginServlet extends HttpServlet {
 					ServletContext context = getServletContext();
 					RequestDispatcher rd = context.getRequestDispatcher("/history.jsp");
 					rd.forward(request, response);
+				}else if(choice.equals("createAnAccount")){
+					ServletContext context = getServletContext();
+					RequestDispatcher rd = context.getRequestDispatcher("/createAnAccount.jsp");
+					rd.forward(request, response);
 				}
 			}
 		} catch(Exception e){
