@@ -48,6 +48,7 @@ public class SellingServlet extends HttpServlet {
 		}
 		if(session.getAttribute("userId") != null){
 			if(mode != null){
+				session.removeAttribute("mode");
 				if(mode.equals("/selling?mode=recordItem")){
 					ServletContext context = getServletContext();
 					RequestDispatcher rd = context.getRequestDispatcher("/recordItem.jsp");

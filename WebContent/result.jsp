@@ -9,9 +9,26 @@
 			<%@include file="shopping.css" %>
 		</style>
 		<title>ご注文を承りました</title>
+		<%@ include file="head.html" %>
+		<link rel="stylesheet" type="text/css" href="header.css"/>
+		<link rel="stylesheet" type="text/css" href="login.css"/>
+		<link rel="stylesheet" type="text/css" href="footer.css"/>
+		<link rel="stylesheet" type="text/css" href="shopping.css"/>
+		<link rel="stylesheet" type="text/css" href="needLogin.css"/>
 	</head>
 	<body>
-		<h1>ご購入ありがとうございました!</h1>
-		<p><a href="shopping"><button>一覧に戻る</button></a></p>
+		<%@include file="producerHeader.jsp"%>
+		<div class="container maincontent">
+			<div class="row width100margin0">
+				<div class="col-md-8">
+					<h1>ご購入ありがとうございました!</h1>
+					<p><a href="shopping"><button>一覧に戻る</button></a></p>
+				</div>
+				<div class="col-md-4">
+					<jsp:include page="login.jsp" />
+				</div>
+			</div>
+		</div>
+		<%@include file="footer.html" %>
 	</body>
 </html>

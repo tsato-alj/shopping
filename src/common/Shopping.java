@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import bean.HistoryBean;
 import bean.ItemBean;
+import bean.LoginUserBean;
 import dao.ShoppingDao;
 
 public class Shopping {
@@ -28,5 +29,19 @@ public class Shopping {
 		ArrayList<HistoryBean> historyList = shopping.getHistory(userId);
 		shopping.close();
 		return historyList;
+	}
+
+	public static ArrayList<ItemBean> getCart(String userId) throws ClassNotFoundException, SQLException{
+		ShoppingDao shopping = new ShoppingDao();
+		ArrayList<ItemBean> cart = shopping.getCart(userId);
+		shopping.close();
+		return cart;
+	}
+
+	public static LoginUserBean getProducer(String producerId) throws ClassNotFoundException, SQLException{
+		ShoppingDao dao = new ShoppingDao();
+		LoginUserBean producer = dao.getProducer(producerId);
+		dao.close();
+		return producer;
 	}
 }

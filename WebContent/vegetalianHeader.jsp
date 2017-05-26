@@ -20,7 +20,7 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active fontcoloriswhite"><a href="#" class="navbarsbackcolor fontcoloriswhite">Category one <span class="sr-only">(current)</span></a></li>
+        <li class="active fontcoloriswhite"><a href="shopping?mode=/shopping?mode=itemList" class="navbarsbackcolor fontcoloriswhite">商品一覧 <span class="sr-only">(current)</span></a></li>
         <li><a href="#">Category two</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -84,7 +84,7 @@
                 </span>
               </li>
               <li class="divider"></li>
-              <li><a class="text-center" href="">View Cart</a></li>
+              <li><a class="text-center" href="shopping?mode=/shopping?mode=viewCart">カートを見る</a></li>
           </ul>
         </li>
       </ul>

@@ -6,6 +6,23 @@ public class ItemBean implements Serializable{
 	private String itemId;
 	private String itemName;
 	private int itemPrice;
+	private String itemProducerId;
+	private int orderId;
+	public int getOrderId() {
+		return orderId;
+	}
+
+	public void setOrderId(int orderId) {
+		this.orderId = orderId;
+	}
+
+	public String getItemProducerId() {
+		return itemProducerId;
+	}
+
+	public void setItemProducerId(String itemProducerId) {
+		this.itemProducerId = itemProducerId;
+	}
 	private int itemQuantity;
 	private String image;
 	private String description;

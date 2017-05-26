@@ -57,8 +57,9 @@ public class NeedLoginServlet extends HttpServlet {
 							String userName = userBean.getName();
 							session.setAttribute("userName", userName);
 							session.setAttribute("userId", id);
-							ServletContext context = getServletContext();;
+							ServletContext context = getServletContext();
 							RequestDispatcher rd = context.getRequestDispatcher(mode);
+							System.out.println(mode);
 							rd.forward(request, response);
 						} else {
 							//NGの場合

@@ -11,8 +11,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import bean.ItemBean;
+import bean.LoginUserBean;
 import common.Shopping;
 
 /**
@@ -42,16 +44,52 @@ public class ShoppingServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		try {
-			ArrayList<ItemBean> itemBeanList = Shopping.getItem();
-			request.setAttribute("itemBeanList", itemBeanList);
+		String mode = null;
+		HttpSession session = request.getSession(true);
+		String userId = (String)session.getAttribute("userId");
+		if(session.getAttribute("mode") != null){
+			mode = (String)session.getAttribute("mode");
+		}else{
+			mode = request.getParameter("mode");
+		}
+		if(userId != null){
+			if(mode != null){
+				session.removeAttribute("mode");
+				if(mode.equals("itemList")){
+					try {
+						ArrayList<ItemBean> itemBeanList = Shopping.getItem();
+						request.setAttribute("itemBeanList", itemBeanList);
+						ServletContext context = getServletContext();
+						RequestDispatcher rd = context.getRequestDispatcher("/itemList.jsp");
+						rd.forward(request, response);
+					} catch (ClassNotFoundException | SQLException e) {
+						// TODO 自動生成された catch ブロック
+						e.printStackTrace();
+					}
+				}else if(mode.equals("/shopping?mode=viewCart")){
+					try {
+						ArrayList<ItemBean> cart = Shopping.getCart(userId);
+						session.setAttribute("cart", cart);
+						ArrayList<LoginUserBean> producers  = new ArrayList<LoginUserBean>();
+						for(int i = 0; i < cart.size(); i++){
+							LoginUserBean producer = Shopping.getProducer(cart.get(i).getItemProducerId());
+							producers.add(producer);
+						}
+						session.setAttribute("producers", producers);
+					} catch (ClassNotFoundException | SQLException e) {
+						// TODO 自動生成された catch ブロック
+						e.printStackTrace();
+					}
+					ServletContext context = getServletContext();
+					RequestDispatcher rd = context.getRequestDispatcher("/cart.jsp");
+					rd.forward(request, response);
+				}
+			}
+		}else if(mode != null){
+			session.setAttribute("mode", mode);
 			ServletContext context = getServletContext();
-			RequestDispatcher rd = context.getRequestDispatcher("/itemList.jsp");
+			RequestDispatcher rd = context.getRequestDispatcher("/needLogin.jsp");
 			rd.forward(request, response);
-		} catch (ClassNotFoundException | SQLException e) {
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
 		}
 	}
-
 }

@@ -39,14 +39,19 @@ public class ModeChange extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession(true);
+		String vegetalianOrProducer = null;
 		if(request.getParameter("vegetalianOrProducer") != null){
-			String vegetalianOrProducer = request.getParameter("vegetalianOrProducer");
+			vegetalianOrProducer = request.getParameter("vegetalianOrProducer");
+		}else if(session.getAttribute("vegetalianOrProducer") != null){
+			vegetalianOrProducer = (String)session.getAttribute("vegetalianOrProducer");
+		}
+		if(vegetalianOrProducer != null){
 			session.setAttribute("vegetalianOrProducer", vegetalianOrProducer);
-			if(request.getParameter("vegetalianOrProducer").equals("vegetalian")){
+			if(vegetalianOrProducer.equals("vegetalian")){
 				ServletContext context = getServletContext();
 				RequestDispatcher rd = context.getRequestDispatcher("/ForVegetalian.jsp");
 				rd.forward(request, response);
-			}else if(request.getParameter("vegetalianOrProducer").equals("producer")){
+			}else if(vegetalianOrProducer.equals("producer")){
 				ServletContext context = getServletContext();
 				RequestDispatcher rd = context.getRequestDispatcher("/ForProducer.jsp");
 				rd.forward(request, response);

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import bean.HistoryBean;
 import bean.ItemBean;
+import bean.LoginUserBean;
 
 public class ShoppingDao {
 	private Connection connection;
@@ -39,7 +40,7 @@ public class ShoppingDao {
 		ResultSet rs = null;
 		try {
 			// SQLを保持するPreparedStatementオブジェクトの生成
-			String sql = "select b.item_id, b.item_name ,b.price,a.quantity from stock a, item b where a.item_id = b.item_id";
+			String sql = "select b.item_id, b.item_name ,b.price, a.quantity from stock a, item b where a.item_id = b.item_id";
 			pstatement = connection.prepareStatement(sql);
 			//SQLの発行
 			//抽出結果が格納されたResultSetオブジェクトを取得
@@ -161,5 +162,69 @@ public class ShoppingDao {
 			// PreparedStatementオブジェクトの解放
 			pstatement.close();
 		}
+	}
+
+	public ArrayList<ItemBean> getCart(String userId) throws SQLException{
+		ArrayList<ItemBean> cart = null;
+		PreparedStatement pstatement = null;
+		ResultSet rs = null;
+		try {
+			// SQLを保持するPreparedStatementオブジェクトの生成
+			String sql = "select a.order_id, a.item_id, b.item_name, b.price, a.quantity, b.producer_id, b.image from cart a , item b where a.user_id = ? and a.item_id = b.item_id";
+			pstatement = connection.prepareStatement(sql);
+			pstatement.setString(1, userId);
+			//SQLの発行
+			//抽出結果が格納されたResultSetオブジェクトを取得
+			rs = pstatement.executeQuery();
+			// 列名を指定してResultSetオブジェクトから値を取得
+			cart = new ArrayList<ItemBean>();
+			while(rs.next()){
+				ItemBean item = new ItemBean();
+				item.setOrderId(rs.getInt("order_id"));
+				item.setItemId(rs.getString("item_id"));
+				item.setItemName(rs.getString("item_name"));
+				item.setItemPrice(rs.getInt("price"));
+				item.setItemQuantity(rs.getInt("quantity"));
+				item.setItemProducerId(rs.getString("producer_id"));
+				item.setImage(rs.getString("image"));
+				cart.add(item);
+			}
+			// ResultSetオブジェクトの解放
+			rs.close();
+		} finally {
+			// PreparedStatementオブジェクトの解放
+			pstatement.close();
+		}
+
+		return cart;
+	}
+
+	public LoginUserBean getProducer(String producerId) throws SQLException{
+		LoginUserBean producer = null;
+		PreparedStatement pstatement = null;
+		ResultSet rs = null;
+		try {
+			// SQLを保持するPreparedStatementオブジェクトの生成
+			String sql = "SELECT * FROM user WHERE id= ?";
+			pstatement = connection.prepareStatement(sql);
+			// INパラメータの設定
+			pstatement.setString(1, producerId);
+			//SQLの発行
+			//抽出結果が格納されたResultSetオブジェクトを取得
+			rs = pstatement.executeQuery();
+			// 列名を指定してResultSetオブジェクトから値を取得
+			if(rs.next()){
+				producer = new LoginUserBean();
+				producer.setId(rs.getString("id"));
+				producer.setName(rs.getString("name"));
+			}
+			// ResultSetオブジェクトの解放
+			rs.close();
+		} finally {
+			// PreparedStatementオブジェクトの解放
+			pstatement.close();
+		}
+
+		return producer;
 	}
 }
