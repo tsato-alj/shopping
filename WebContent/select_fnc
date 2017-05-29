@@ -1,0 +1,156 @@
+//jspでの表示方法の例
+
+
+
+<div id="list">
+
+//カテゴリのボタン
+<div id="category">
+	<form action="ItemServlet" method="post">
+		<input type="hidden" name="cate"  />
+		<button type="submit" name="" class="cate_btn">All</button>
+	</form>
+	<form action="ItemServlet" method="post">
+		<input type="hidden" name="cate" value="1" />
+		<button type="submit" name="" class="cate_btn">1</button>
+	</form>
+	<form action="ItemServlet" method="post">
+		<input type="hidden" name="cate" value="2" />
+		<button type="submit" name="" class="cate_btn">2</button>
+	</form>
+</div>
+
+
+
+
+
+//カテゴリ別表示
+<div id="itemlist">
+<% ArrayList<ItemBean> getcate = (ArrayList<ItemBean>)request.getAttribute("getcate");
+	if( getcate == null){%>
+
+	<table>
+		<%　ArrayList<ItemBean> items = (ArrayList<ItemBean>)request.getAttribute("itembean");
+		　　for(ItemBean item : items){　　%>
+
+		<tr>
+			<td><%= item.getCategory() %></td>
+			<td><%= item.getItem_id() %></td>
+			<td><%= item.getItem_name() %></td>
+			<td><%= item.getPrice() %></td>
+		<form action="BuyServlet" method="post">
+			<td>
+				<select name="quantity" value="<%= item.getItemquantity() %>">
+				<%　for(int i=0; i<=item.getItemquantity();){ %>
+					<option><%= i++ %></option>
+				<% } %>
+				</select>
+			</td>
+			<td>
+				<input type="hidden" name="item_id" value="<%= item.getItem_id() %>" />
+				<input type="hidden" name="item_name" value="<%= item.getItem_name() %>" />
+				<input type="hidden" name="price" value="<%= item.getPrice() %>" />
+				<input type="hidden" name="userid" value="<%= session.getAttribute("userid") %>" />
+				<button type="submit" name="logaction">確認する</button>
+			</td>
+		</form>
+		</tr>
+
+		<% } %>
+	</table>
+
+
+<% }else{ %>
+	<table>
+		<% for(ItemBean item : getcate){%>
+
+		<tr>
+			<td><%= item.getCategory() %></td>
+			<td><%= item.getItem_id() %></td>
+			<td><%= item.getItem_name() %></td>
+			<td><%= item.getPrice() %></td>
+		<form action="BuyServlet" method="post">
+			<td>
+				<select name="quantity" value="<%= item.getItemquantity() %>">
+				<%　for(int i=0; i<=item.getItemquantity();){ %>
+					<option><%= i++ %></option>
+				<% } %>
+				</select>
+			</td>
+			<td>
+				<input type="hidden" name="item_id" value="<%= item.getItem_id() %>" />
+				<input type="hidden" name="item_name" value="<%= item.getItem_name() %>" />
+				<input type="hidden" name="price" value="<%= item.getPrice() %>" />
+				<input type="hidden" name="userid" value="<%= session.getAttribute("userid") %>" />
+				<button type="submit" name="logaction">確認する</button>
+			</td>
+		</form>
+		</tr>
+
+		<% } %>
+	</table>
+<% } %>
+</div>
+
+
+
+
+
+// servletの処理
+
+
+HttpSession session = request.getSession(false);
+
+
+		request.setCharacterEncoding("UTF-8");
+		ArrayList<ItemBean> item = null;
+
+		try{
+				shop shop = new shop();
+				item = shop.execute(request);
+
+				String cate = request.getParameter("cate");
+				System.out.println("cate="+cate);
+
+				if( cate != null && !cate.equals("")){
+					ArrayList<ItemBean> catelist = new ArrayList<ItemBean>();
+
+					for(ItemBean cateitem : item){
+						if(cate.equals(cateitem.getCategory())){
+
+							cateitem.getItem_id();
+							cateitem.getItem_name();
+							cateitem.getPrice();
+							cateitem.getItemquantity();
+
+							catelist.add(cateitem);
+						}
+					}
+
+					request.setAttribute("getcate", catelist);
+
+					ServletContext context = getServletContext();
+					RequestDispatcher rd = context.getRequestDispatcher("/itemlist.jsp");
+					rd.forward(request, response);
+
+				}else{
+
+					if(item != null){
+					request.setAttribute("itembean", item);
+					System.out.println(item);
+					ServletContext context = getServletContext();
+					RequestDispatcher rd = context.getRequestDispatcher("/itemlist.jsp");
+					rd.forward(request, response);
+
+					}else{
+						request.setAttribute("message", "商品がないです");
+						ServletContext context = getServletContext();
+						RequestDispatcher rd = context.getRequestDispatcher("/itemlist.jsp");
+						rd.forward(request, response);
+					}
+
+				}
+
+		}catch(Exception e){
+			request.setAttribute("message", "エラーです");
+		}

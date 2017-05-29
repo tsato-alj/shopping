@@ -72,9 +72,11 @@ public class AddToCartServlet extends HttpServlet {
 					// TODO 自動生成された catch ブロック
 					e.printStackTrace();
 				}
+				session.setAttribute("mode", "/shopping?mode=itemList");
 				ServletContext context = getServletContext();
-				RequestDispatcher rd = context.getRequestDispatcher("/shopping?mode=viewCart");
+				RequestDispatcher rd = context.getRequestDispatcher("/shopping");
 				rd.forward(request, response);
+
 			}
 		}else if(mode != null){
 			session.setAttribute("mode", mode);
