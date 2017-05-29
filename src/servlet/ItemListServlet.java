@@ -2,6 +2,7 @@ package servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -11,19 +12,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import common.Selling;
+import bean.ItemBean;
+import common.Shopping;
 
 /**
- * Servlet implementation class AddDescriptionServlet
+ * Servlet implementation class itemListServlet
  */
-@WebServlet("/adddescription")
-public class AddDescriptionServlet extends HttpServlet {
+@WebServlet("/itemlist")
+public class ItemListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AddDescriptionServlet() {
+    public ItemListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,19 +41,16 @@ public class AddDescriptionServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		String description = request.getParameter("description");
-		String itemId = request.getParameter("itemId");
-		request.setAttribute("itemId", itemId);
 		try {
-			Selling.addDescription(description, itemId);
+			ArrayList<ItemBean> itemBeanList = Shopping.getItem();
+			request.setAttribute("itemBeanList", itemBeanList);
+			ServletContext context = getServletContext();
+			RequestDispatcher rd = context.getRequestDispatcher("/itemList.jsp");
+			rd.forward(request, response);
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		}
-		ServletContext context = getServletContext();
-		RequestDispatcher rd = context.getRequestDispatcher("/iteminfo");
-		rd.forward(request, response);
 	}
 
 }

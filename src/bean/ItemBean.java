@@ -8,6 +8,15 @@ public class ItemBean implements Serializable{
 	private int itemPrice;
 	private String itemProducerId;
 	private int orderId;
+	private String category;
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
 	public int getOrderId() {
 		return orderId;
 	}

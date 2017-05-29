@@ -44,4 +44,10 @@ public class Shopping {
 		dao.close();
 		return producer;
 	}
+
+	public static void addToCart(String userId, String itemId, int quantity) throws ClassNotFoundException, SQLException{
+		ShoppingDao dao = new ShoppingDao();
+		dao.addToCart(userId, itemId, quantity);
+		dao.close();
+	}
 }

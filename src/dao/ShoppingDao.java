@@ -40,7 +40,7 @@ public class ShoppingDao {
 		ResultSet rs = null;
 		try {
 			// SQLを保持するPreparedStatementオブジェクトの生成
-			String sql = "select b.item_id, b.item_name ,b.price, a.quantity from stock a, item b where a.item_id = b.item_id";
+			String sql = "select b.item_id, b.item_name, b.price, a.quantity, b.producer_id, b.item_description, b.image, b.category from stock a, item b where a.item_id = b.item_id";
 			pstatement = connection.prepareStatement(sql);
 			//SQLの発行
 			//抽出結果が格納されたResultSetオブジェクトを取得
@@ -53,6 +53,10 @@ public class ShoppingDao {
 				bean.setItemName(rs.getString("item_name"));
 				bean.setItemPrice(rs.getInt("price"));
 				bean.setItemQuantity(rs.getInt("quantity"));
+				bean.setItemProducerId(rs.getString("producer_id"));
+				bean.setDescription(rs.getString("item_description"));
+				bean.setImage(rs.getString("image"));
+				bean.setCategory(rs.getString("category"));
 				beans.add(bean);
 			}
 			// ResultSetオブジェクトの解放
@@ -72,7 +76,7 @@ public class ShoppingDao {
 		ResultSet rs = null;
 		try {
 			// SQLを保持するPreparedStatementオブジェクトの生成
-			String sql = "select b.item_id, b.item_name, b.price ,a.quantity from stock a, item b where a.item_id = b.item_id and a.item_id = ?";
+			String sql = "select b.item_id, b.item_name, b.price, a.quantity, b.producer_id, b.item_description, b.image, b.category from stock a, item b where a.item_id = b.item_id and a.item_id = ?";
 			pstatement = connection.prepareStatement(sql);
 			pstatement.setString(1, itemId);
 			//SQLの発行
@@ -85,6 +89,10 @@ public class ShoppingDao {
 				bean.setItemName(rs.getString("item_name"));
 				bean.setItemPrice(rs.getInt("price"));
 				bean.setItemQuantity(rs.getInt("quantity"));
+				bean.setItemProducerId(rs.getString("producer_id"));
+				bean.setDescription(rs.getString("item_description"));
+				bean.setImage(rs.getString("image"));
+				bean.setCategory(rs.getString("category"));
 			}
 			// ResultSetオブジェクトの解放
 			rs.close();
@@ -217,6 +225,8 @@ public class ShoppingDao {
 				producer = new LoginUserBean();
 				producer.setId(rs.getString("id"));
 				producer.setName(rs.getString("name"));
+				producer.setAddress(rs.getString("address"));
+				producer.setEmail(rs.getString("email"));
 			}
 			// ResultSetオブジェクトの解放
 			rs.close();
@@ -226,5 +236,23 @@ public class ShoppingDao {
 		}
 
 		return producer;
+	}
+
+	public void addToCart(String userId, String itemId, int quantity) throws SQLException{
+		PreparedStatement pstatement = null;
+		try {
+			// SQLを保持するPreparedStatementオブジェクトの生成
+			String sql = "insert into cart (user_id, item_id, quantity) values (?, ?, ?)";
+			pstatement = connection.prepareStatement(sql);
+			// INパラメータの設定
+			pstatement.setString(1, userId);
+			pstatement.setString(2, itemId);
+			pstatement.setInt(3, quantity);
+			//SQLの発行
+			pstatement.executeUpdate();
+		} finally {
+			// PreparedStatementオブジェクトの解放
+			pstatement.close();
+		}
 	}
 }

@@ -59,7 +59,6 @@ public class NeedLoginServlet extends HttpServlet {
 							session.setAttribute("userId", id);
 							ServletContext context = getServletContext();
 							RequestDispatcher rd = context.getRequestDispatcher(mode);
-							System.out.println(mode);
 							rd.forward(request, response);
 						} else {
 							//NGの場合
