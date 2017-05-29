@@ -6,17 +6,25 @@
 
 //カテゴリのボタン
 <div id="category">
-	<form action="ItemServlet" method="post">
-		<input type="hidden" name="cate"  />
+	<form action="itemlist" method="post">
+		<input type="hidden" name="category" value="All"/>
 		<button type="submit" name="" class="cate_btn">All</button>
 	</form>
-	<form action="ItemServlet" method="post">
-		<input type="hidden" name="cate" value="1" />
-		<button type="submit" name="" class="cate_btn">1</button>
+	<form action="itemlist" method="post">
+		<input type="hidden" name="category" value="Vegetable" />
+		<button type="submit" name="" class="cate_btn">Vegetalian</button>
 	</form>
-	<form action="ItemServlet" method="post">
-		<input type="hidden" name="cate" value="2" />
-		<button type="submit" name="" class="cate_btn">2</button>
+	<form action="itemlist" method="post">
+		<input type="hidden" name="category" value="Fruit" />
+		<button type="submit" name="" class="cate_btn">Fruit</button>
+	</form>
+	<form action="itemlist" method="post">
+		<input type="hidden" name="category" value="Rice" />
+		<button type="submit" name="" class="cate_btn">Rice</button>
+	</form>
+	<form action="itemlist" method="post">
+		<input type="hidden" name="category" value="Soy" />
+		<button type="submit" name="" class="cate_btn">Soy</button>
 	</form>
 </div>
 
@@ -30,8 +38,8 @@
 	if( getcate == null){%>
 
 	<table>
-		<%　ArrayList<ItemBean> items = (ArrayList<ItemBean>)request.getAttribute("itembean");
-		　　for(ItemBean item : items){　　%>
+		<% ArrayList<ItemBean> items = (ArrayList<ItemBean>)request.getAttribute("itembean");
+			for(ItemBean item : items){%>
 
 		<tr>
 			<td><%= item.getCategory() %></td>
@@ -109,7 +117,7 @@ HttpSession session = request.getSession(false);
 				shop shop = new shop();
 				item = shop.execute(request);
 
-				String cate = request.getParameter("cate");
+				String cate = request.getParameter("category");
 				System.out.println("cate="+cate);
 
 				if( cate != null && !cate.equals("")){

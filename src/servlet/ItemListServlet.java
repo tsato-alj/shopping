@@ -43,6 +43,17 @@ public class ItemListServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			ArrayList<ItemBean> itemBeanList = Shopping.getItem();
+			String category = request.getParameter("category");
+			if(!category.equals("All") && category != null){
+				ArrayList<ItemBean> cateList = new ArrayList<ItemBean>();
+
+				for(ItemBean cateItem : itemBeanList){
+					if(category.equals(cateItem.getCategory())){
+						cateList.add(cateItem);
+					}
+				}
+				itemBeanList = cateList;
+			}
 			request.setAttribute("itemBeanList", itemBeanList);
 			ServletContext context = getServletContext();
 			RequestDispatcher rd = context.getRequestDispatcher("/itemList.jsp");
