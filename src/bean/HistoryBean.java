@@ -3,10 +3,17 @@ package bean;
 import java.io.Serializable;
 
 public class HistoryBean implements Serializable{
+	private int orderId;
 	private String itemId;
 	private String itemName;
 	private int itemByQuantity;
 
+	public int getOrderId() {
+		return orderId;
+	}
+	public void setOrderId(int orderId) {
+		this.orderId = orderId;
+	}
 	public String getItemId() {
 		return itemId;
 	}

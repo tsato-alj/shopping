@@ -21,7 +21,7 @@
 		<link rel="stylesheet" type="text/css" href="needLogin.css"/>
 	</head>
 	<body>
-		<%@include file="producerHeader.jsp"%>
+		<%@include file="header.jsp"%>
 		<div class="maincontent">
 			<div class="container">
 		   		<div class="row">
@@ -55,9 +55,9 @@
 				                    <tr>
 				                        <td class="col-sm-8 col-md-6">
 				                        <div class="media">
-				                            <a class="thumbnail pull-left" href="#"> <img class="media-object" src="<%=image %>" style="width: 72px; height: 72px;"> </a>
+				                            <a class="thumbnail pull-left" href="iteminfo?itemId=<%=itemId %>"> <img class="media-object" src="<%=image %>" style="width: 72px; height: 72px;"> </a>
 				                            <div class="media-body">
-				                                <h4 class="media-heading"><a href="#"><%=itemName %></a></h4>
+				                                <h4 class="media-heading"><a href="iteminfo?itemId=<%=itemId %>"><%=itemName %></a></h4>
 				                                <h5 class="media-heading"> by <a href="#"><%=producerName %></a></h5>
 				                            </div>
 				                        </div></td>
@@ -65,8 +65,8 @@
 				                        <%=quantity %>
 				                        <input type="hidden" name"<%=itemId%>list" value="<%=quantity%>">
 				                        </td>
-				                        <td class="col-sm-1 col-md-1 text-center"><strong><%=price %></strong></td>
-				                        <td class="col-sm-1 col-md-1 text-center"><strong><%=itemTotalPrice %></strong></td>
+				                        <td class="col-sm-1 col-md-1 text-center"><strong>&yen<%=price %></strong></td>
+				                        <td class="col-sm-1 col-md-1 text-center"><strong>&yen<%=itemTotalPrice %></strong></td>
 				                        <td class="col-sm-1 col-md-1">
 				                        <button type="submit" name="delete" value="<%=orderId %>" class="btn btn-danger" action="shopping?mode=deleteItemInCart">
 				                            <span class="glyphicon glyphicon-remove"></span> Remove
@@ -80,22 +80,25 @@
 			                        <td>   </td>
 			                        <td>   </td>
 			                        <td><h3>Total</h3></td>
-			                        <td class="text-right"><h3><strong><%=allItemPrice %></strong></h3></td>
+			                        <td class="text-right"><h3><strong>&yen<%=allItemPrice %></strong></h3></td>
 			                    </tr>
 			                    <tr>
 			                        <td>   </td>
 			                        <td>   </td>
 			                        <td>   </td>
 			                        <td>
-			                        <button type="button" class="btn btn-default">
-			                            <span class="glyphicon glyphicon-shopping-cart"></span> Continue Shopping
-			                        </button></td>
+				                       	<a href="shopping?mode=/shopping?mode=itemList">
+					                        <button type="submit" class="btn btn-default">
+					                            <span class="glyphicon glyphicon-shopping-cart"></span> 買い物を続ける
+					                        </button>
+				                        </a>
+			                        </td>
 			                        <td>
-			                        <form action="result" method="post">
-				                        <button type="submit" class="btn btn-success">
-				                            Checkout <span class="glyphicon glyphicon-play"></span>
-				                        </button>
-			                        </form>
+				                        <form action="result" method="post">
+					                        <button type="submit" class="btn btn-success">
+					                             <span class="glyphicon glyphicon-play"></span>チェックアウトする
+					                        </button>
+				                        </form>
 			                        </td>
 			                    </tr>
 			                </tbody>

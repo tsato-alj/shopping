@@ -1,6 +1,8 @@
 package servlet;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -12,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import bean.GoalBean;
 import bean.HistoryBean;
 import bean.LoginUserBean;
 import common.Login;
@@ -64,8 +67,38 @@ public class LoginServlet extends HttpServlet {
 						String userName = userBean.getName();
 						session.setAttribute("userName", userName);
 						session.setAttribute("userId", id);
+						String messageAboutGoal = null;
+						ArrayList<GoalBean> goals = null;
+						if(Shopping.getGoal(id) != null){
+							goals = Shopping.getGoal(id);
+						}
+						if(goals != null){
+							GoalBean newestGoal = null;
+				            for(GoalBean goal: goals){
+				                newestGoal = goal;
+				            }
+				            LocalDate EndDate = null;
+				            if(newestGoal != null){
+				                EndDate = newestGoal.getEndDate();
+				            }
+				            if(EndDate != null){
+				                messageAboutGoal = "現在新しい目標は設定されていません";
+				            }else{
+				                LocalDate goalDate = newestGoal.getGoalDate();
+				                LocalDate today = LocalDate.now();
+				                Long dayDiff = ChronoUnit.DAYS.between(today, goalDate);
+				                if(dayDiff > 0){
+				                    messageAboutGoal = "目標達成予定日まで後<strong>" + dayDiff + "</storong>日";
+				                }else if(dayDiff == 0){
+				                    messageAboutGoal = "目標達成予定日は<strong>本日</strong>";
+				                }
+				            }
+						}else{
+							messageAboutGoal = "目標があるお買い物をはじめましょう";
+						}
+						session.setAttribute("goals", goals);
 						ServletContext context = getServletContext();
-						RequestDispatcher rd = context.getRequestDispatcher("/shopping");
+						RequestDispatcher rd = context.getRequestDispatcher("/modechange");
 						rd.forward(request, response);
 					} else {
 						//NGの場合
@@ -77,7 +110,7 @@ public class LoginServlet extends HttpServlet {
 					session = request.getSession();
 					session.invalidate();
 					ServletContext context = getServletContext();
-					RequestDispatcher rd = context.getRequestDispatcher("/login.jsp");
+					RequestDispatcher rd = context.getRequestDispatcher("/modechange");
 					rd.forward(request, response);
 				}else if(choice.equals("history")){
 					session = request.getSession();

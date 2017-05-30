@@ -2,9 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ page import="bean.LoginUserBean" %>
 
-
-<h1 class="fontismrbedfort textcenter h1">ProuVege For Producer</h1>
-<p class="fontismrbedfort textcenter">Proud to be Vegetalian</p>
+<a href="ForVegetalian.jsp">
+	<h1 class="fontismrbedfort textcenter h1">ProuVege For Producer</h1>
+	<p class="fontismrbedfort textcenter">Proud to be Vegetalian</p>
+</a>
 <p><a class="pull-right goto" href="modechange?vegatlianOrProducer=vegetalian">Go to "For Vegetalian"</a></p>
 <br/>
 <nav class="navbar navbar-default navbarsbackcolor navswidth">

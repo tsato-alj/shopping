@@ -56,6 +56,11 @@ public class ModeChange extends HttpServlet {
 				RequestDispatcher rd = context.getRequestDispatcher("/ForProducer.jsp");
 				rd.forward(request, response);
 			}
+		}else{
+			session.setAttribute("vegetalianOrProducer", "vegetalian");
+			ServletContext context = getServletContext();
+			RequestDispatcher rd = context.getRequestDispatcher("/ForVegetalian.jsp");
+			rd.forward(request, response);
 		}
 	}
 

@@ -2,6 +2,7 @@ package servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -11,21 +12,22 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import bean.ItemBean;
+import bean.GoalBean;
 import common.Shopping;
 
 /**
- * Servlet implementation class itemListServlet
+ * Servlet implementation class RecordGoalServlet
  */
-@WebServlet("/itemlist")
-public class ItemListServlet extends HttpServlet {
+@WebServlet("/recordgoal")
+public class RecordGoalServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ItemListServlet() {
+    public RecordGoalServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -41,25 +43,27 @@ public class ItemListServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		HttpSession session = request.getSession(true);
+		String userId = (String)session.getAttribute("userId");
+		String goal = request.getParameter("goal");
+		LocalDate start = LocalDate.parse(request.getParameter("startDate"));
+		LocalDate goalDate = LocalDate.parse(request.getParameter("goalDate"));
+		int historyId = Integer.parseInt(request.getParameter("historyId"));
 		try {
-			ArrayList<ItemBean> itemBeanList = Shopping.getItem();
-			String category = request.getParameter("category");
-			if(!category.equals("All") && category != null){
-				ArrayList<ItemBean> cateList = new ArrayList<ItemBean>();
-				for(ItemBean cateItem : itemBeanList){
-					if(category.equals(cateItem.getCategory())){
-						cateList.add(cateItem);
-					}
-				}
-				itemBeanList = cateList;
+			Shopping.recordGoal(userId, historyId, goal, start, goalDate);
+			ArrayList<GoalBean> goals = null;
+			if(Shopping.getGoal(userId) != null){
+				goals = Shopping.getGoal(userId);
 			}
-			request.setAttribute("itemBeanList", itemBeanList);
-			ServletContext context = getServletContext();
-			RequestDispatcher rd = context.getRequestDispatcher("/itemList.jsp");
-			rd.forward(request, response);
+			session.setAttribute("goal", goals);
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		}
+		ServletContext context = getServletContext();
+		RequestDispatcher rd = context.getRequestDispatcher("/ForVegetalian.jsp");
+		rd.forward(request, response);
 	}
+
 }

@@ -1,12 +1,15 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
+import bean.GoalBean;
 import bean.HistoryBean;
 import bean.ItemBean;
 import bean.LoginUserBean;
@@ -111,7 +114,7 @@ public class ShoppingDao {
 		ResultSet rs = null;
 		try {
 			// SQLを保持するPreparedStatementオブジェクトの生成
-			String sql = "select a.item_id, b.item_name, a.quantity from history a , item b where a.id = ? and a.item_id = b.item_id";
+			String sql = "select a.order_id, a.item_id, b.item_name, a.quantity from history a , item b where a.id = ? and a.item_id = b.item_id";
 			pstatement = connection.prepareStatement(sql);
 			pstatement.setString(1, userId);
 			//SQLの発行
@@ -121,6 +124,7 @@ public class ShoppingDao {
 			beans = new ArrayList<HistoryBean>();
 			while(rs.next()){
 				HistoryBean bean = new HistoryBean();
+				bean.setOrderId(rs.getInt("order_id"));
 				bean.setItemId(rs.getString("item_id"));
 				bean.setItemName(rs.getString("item_name"));
 				bean.setItemByQuantity(rs.getInt("quantity"));
@@ -248,6 +252,103 @@ public class ShoppingDao {
 			pstatement.setString(1, userId);
 			pstatement.setString(2, itemId);
 			pstatement.setInt(3, quantity);
+			//SQLの発行
+			pstatement.executeUpdate();
+		} finally {
+			// PreparedStatementオブジェクトの解放
+			pstatement.close();
+		}
+	}
+
+	public void deleteCart(String userId) throws SQLException{
+		PreparedStatement pstatement = null;
+		try {
+			// SQLを保持するPreparedStatementオブジェクトの生成
+			String sql = "delete from cart where user_id = ?";
+			pstatement = connection.prepareStatement(sql);
+			// INパラメータの設定
+			pstatement.setString(1, userId);
+			//SQLの発行
+			pstatement.executeUpdate();
+		} finally {
+			// PreparedStatementオブジェクトの解放
+			pstatement.close();
+		}
+	}
+
+	public void recordGoal(String userId, int historyId, String goal, LocalDate startDate, LocalDate goalDate) throws SQLException{
+		PreparedStatement pstatement = null;
+		Date SQLStartDate = Date.valueOf(startDate);
+		Date SQLGoalDate = Date.valueOf(goalDate);
+		try {
+			// SQLを保持するPreparedStatementオブジェクトの生成
+			String sql = "insert into goal (user_id, history_id, goal, start, goalDate) values (?, ?, ?, ?, ?)";
+			pstatement = connection.prepareStatement(sql);
+			// INパラメータの設定
+			pstatement.setString(1, userId);
+			pstatement.setInt(2, historyId);
+			pstatement.setString(3, goal);
+			pstatement.setDate(4, SQLStartDate);
+			pstatement.setDate(5, SQLGoalDate);
+			//SQLの発行
+			pstatement.executeUpdate();
+		} finally {
+			// PreparedStatementオブジェクトの解放
+			pstatement.close();
+		}
+	}
+
+	public ArrayList<GoalBean> getGoal(String userId) throws SQLException{
+		ArrayList<GoalBean> goals = new ArrayList<GoalBean>();
+		PreparedStatement pstatement = null;
+		ResultSet rs = null;
+		try {
+			// SQLを保持するPreparedStatementオブジェクトの生成
+			String sql = "SELECT * FROM goal WHERE user_id= ?";
+			pstatement = connection.prepareStatement(sql);
+			// INパラメータの設定
+			pstatement.setString(1, userId);
+			//SQLの発行
+			//抽出結果が格納されたResultSetオブジェクトを取得
+			rs = pstatement.executeQuery();
+			// 列名を指定してResultSetオブジェクトから値を取得
+			while(rs.next()){
+				GoalBean goal = new GoalBean();
+				goal.setOrderId(rs.getInt("order_id"));
+				goal.setUserId(rs.getString("user_id"));
+				goal.setHistoryId(rs.getInt("history_id"));
+				goal.setGoal(rs.getString("goal"));
+				goal.setStart(rs.getDate("start").toLocalDate());
+				goal.setGoalDate(rs.getDate("goalDate").toLocalDate());
+				if(rs.getDate("EndDate") != null){
+					goal.setEndDate(rs.getDate("EndDate").toLocalDate());
+				}
+				goals.add(goal);
+			}
+			if(goals.size() <= 0){
+				goals = null;
+			}
+			// ResultSetオブジェクトの解放
+			rs.close();
+		} finally {
+			// PreparedStatementオブジェクトの解放
+			pstatement.close();
+		}
+
+		return goals;
+	}
+
+	public void achieveGoal(String userId, int historyId, LocalDate endDate) throws SQLException{
+		PreparedStatement pstatement = null;
+		Date SQLEndDate = Date.valueOf(endDate);
+		try {
+			// SQLを保持するPreparedStatementオブジェクトの生成
+			String sql = "update goal set EndDate = ? where user_id = ? and history_id = ?";
+			pstatement = connection.prepareStatement(sql);
+			// INパラメータの設定
+			pstatement.setDate(1, SQLEndDate);
+			pstatement.setString(2, userId);
+			pstatement.setInt(3, historyId);
 			//SQLの発行
 			pstatement.executeUpdate();
 		} finally {

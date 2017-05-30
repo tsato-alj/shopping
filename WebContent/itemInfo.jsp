@@ -69,7 +69,7 @@
 					<p><%=itemDescription %></p>
 					<form action="addtocart">
 						<input type="hidden" name="itemId" value=<%= itemId %>></input>
-						<input type="hidden" name="mode" value="/addcart?itemId=<%= itemId %>"></input>
+						<input type="hidden" name="mode" value="/addtocart?itemId=<%= itemId %>"></input>
 						<select name="quantity">
 						<% for(int i = 0; i <= quantity; i++ ) {%>
 							<option value=<%=i%>><%=i%></option>
