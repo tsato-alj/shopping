@@ -81,6 +81,29 @@
 				<div class="col-md-4">
 					<jsp:include page="login.jsp" />
 				</div>
+
+				//レビュー機能追加
+				<div id="review">
+
+					<form action="reviewServlet" methpd="post">
+				 		<p>ニックネーム: <input type="text"  name="nickname" value="" required /></p>
+						<p>評価: <select name="evaluation" required>
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+										<option>4</option>
+										<option>5</option>
+								 </select></p>
+						<p>タイトル:<input type="text" name="title" value="" required /></p>
+						<p>内容:<br /><textarea name="contenttext" rows="10" cols="30" maxlength="200" required ></textarea></p>
+
+						<input type="hidden" name="itemId" value=<%= itemId %> />
+					 	<p><button type="submit" name="" value="">レビューする</button>
+					 	<button type="reset" name="" value="">リセット</button></p>
+					</form>
+
+				</div>
+
 			</div>
 		</div>
 		<%@include file="footer.html" %>
