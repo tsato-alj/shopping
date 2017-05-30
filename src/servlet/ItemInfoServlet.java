@@ -62,6 +62,23 @@ public class ItemInfoServlet extends HttpServlet {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		}
+
+		//review disp
+		ReviewDao review;
+		ReviewBean reviewbean = null;
+		try{
+			review = new ReviewDao();
+			reviewbean = review.reviewSelect(itemId);
+			request.setAttribute("review", reviewbean);
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
+
+
+
+
+		//
 		ServletContext context = getServletContext();
 		RequestDispatcher rd = context.getRequestDispatcher("/itemInfo.jsp");
 		rd.forward(request, response);

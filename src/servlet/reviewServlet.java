@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import BeanDao.ReviewBean;
 import BeanDao.ReviewDao;
 
 /**
@@ -43,11 +44,11 @@ public class reviewServlet extends HttpServlet {
 		String evaluation = request.getParameter("evaluation");
 		String title = request.getParameter("title");
 		String contenttext = request.getParameter("contenttext");
+		String item_id = request.getParameter("item_id");
 
 		//sessionでuseridの取得
-		String[] buyitem = (String[])session.getAttribute("buyitem");
-			String id = buyitem[4];
-			String item_id = buyitem[0];
+		String　id = (String)session.getAttribute("");
+
 
 		//型変換
 			int eva = Integer.parseInt(evaluation);
@@ -58,25 +59,28 @@ public class reviewServlet extends HttpServlet {
 
 
 
-		//DBの作成
-		//beanの作成
-		//Daoの作成
-		//メソッド呼び出し、表示
-		ReviewDao review;
-		try {
-			review = new ReviewDao();
-			review.reviewInsert(id, item_id, nickname, time, contenttext, eva, title);
-			ServletContext context = getServletContext();
-			RequestDispatcher rd = context.getRequestDispatcher("/review.jsp");
-			rd.forward(request, response);
+			//DBの作成
+			//beanの作成
+			//Daoの作成
+			//メソッド呼び出し、表示
+			ReviewDao review;
+			ReviewBean reviewbean = null;
+			try {
+				review = new ReviewDao();
+				review.reviewInsert(id, item_id, nickname, time, contenttext, eva, title);
+
+				//review表示
+
+				//addtocartへ　表示するレビューの仕分けはaddtocartで
+				ServletContext context = getServletContext();
+				RequestDispatcher rd = context.getRequestDispatcher("/ItemInfoServlet");
+				rd.forward(request, response);
 
 
-		} catch (ClassNotFoundException | SQLException e) {
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
-		}
-
-
+			} catch (ClassNotFoundException | SQLException e) {
+				// TODO 自動生成された catch ブロック
+				e.printStackTrace();
+			}
 
 
 

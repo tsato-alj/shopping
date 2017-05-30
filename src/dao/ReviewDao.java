@@ -24,9 +24,9 @@ public class ReviewDao extends HttpServlet {
 
 	public ReviewDao() throws ClassNotFoundException, SQLException{
 
-		String url = "jdbc:mysql://localhost:3306/shopdata";
+		String url = "jdbc:mysql://localhost:3306/sample";
 		String user = "root";
-		String password = "imaima";
+		String password = "root";
 		String msg = "";
         try {
         	connection = DriverManager.getConnection(url, user, password);
@@ -71,7 +71,7 @@ public class ReviewDao extends HttpServlet {
 	}
 
 
-	public ReviewBean reviewSelect(String item_id, String nickname, Date time, String coment, int evaluation, String title) throws SQLException {
+	public ReviewBean reviewSelect(String item_id) throws SQLException {
 
 
 		ReviewBean reviewBean = null;
@@ -79,16 +79,9 @@ public class ReviewDao extends HttpServlet {
 		ResultSet rs = null;
 
 		try{
-			String sql ="SELECT * FROM review where id =? && item_id =? && contribution_time =? && coment =? && evaluation=? && title=?";
+			String sql ="SELECT * FROM review where item_id =?";
 			ps = connection.prepareStatement(sql);
-
-			ps.setString(2, item_id);
-			ps.setString(3, nickname);
-			ps.setDate(4, time);
-			ps.setString(5, coment);
-			ps.setInt(6, evaluation);
-			ps.setString(7, title);
-
+			ps.setString(1, item_id);
 			rs = ps.executeQuery();
 
 			while(rs.next()){
