@@ -91,12 +91,16 @@ public class LoginServlet extends HttpServlet {
 				                    messageAboutGoal = "目標達成予定日まで後<strong>" + dayDiff + "</storong>日";
 				                }else if(dayDiff == 0){
 				                    messageAboutGoal = "目標達成予定日は<strong>本日</strong>";
+				                }else if(dayDiff < 0){
+				                	LocalDate endDate = LocalDate.now();
+				                	Shopping.achieveGoal(id, endDate);
+				                	messageAboutGoal = "目標達成予定日を越えました";
 				                }
 				            }
 						}else{
 							messageAboutGoal = "目標があるお買い物をはじめましょう";
 						}
-						session.setAttribute("goals", goals);
+						session.setAttribute("messageAboutGoal", messageAboutGoal);
 						ServletContext context = getServletContext();
 						RequestDispatcher rd = context.getRequestDispatcher("/modechange");
 						rd.forward(request, response);

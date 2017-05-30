@@ -40,7 +40,7 @@
 						<input type="hidden" name="historyId" value="<%=historyId%>"/>
 						<p>目標: <textarea name="goal" rows="2" cols="30" maxlength="50" ></textarea></p>
 				 		<p>開始日: <input type="date" class="datepicker" name="startDate"  required /></p>
-				 		<p>目標終了予定日: <input type="date" class="datepicker" name="goalDate" required /></p>
+				 		<p>達成予定日: <input type="date" class="datepicker" name="goalDate" required /></p>
 				 		<p><button type="submit" name="" value="">目標を設定する</button></p>
 				 		<p><button type="reset" name="" value="">リセット</button></p>
 					</form>

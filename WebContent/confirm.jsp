@@ -19,7 +19,7 @@
 	<title>購入確認</title>
 	</head>
 	<body>
-		<jsp:include page="vegetalianHeader.jsp"/>
+		<%@include file="header.jsp"%>
 		<div id="main">
 			<h1>商品一覧</h1>
 			<p>つぎの商品を購入しますか?</p>
@@ -47,7 +47,9 @@
 					</tbody>
 				</form>
 			</table>
-			<p><a href="itemList.jsp"><button>戻る</button></a></p>
+			<p><a href="itmlist"><button>戻る</button></a></p>
 		</div>
+		<%@include file="footer.html" %>
+		<%@include file="script.html" %>
 	</body>
 </html>

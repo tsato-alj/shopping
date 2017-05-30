@@ -40,5 +40,6 @@
 			</div>
 		</div>
 		<%@include file="footer.html" %>
+		<%@include file="script.html" %>
 	</body>
 </html>

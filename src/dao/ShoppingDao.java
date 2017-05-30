@@ -338,17 +338,16 @@ public class ShoppingDao {
 		return goals;
 	}
 
-	public void achieveGoal(String userId, int historyId, LocalDate endDate) throws SQLException{
+	public void achieveGoal(int orderId,LocalDate endDate) throws SQLException{
 		PreparedStatement pstatement = null;
 		Date SQLEndDate = Date.valueOf(endDate);
 		try {
 			// SQLを保持するPreparedStatementオブジェクトの生成
-			String sql = "update goal set EndDate = ? where user_id = ? and history_id = ?";
+			String sql = "update goal set EndDate = ? where order_id = ?";
 			pstatement = connection.prepareStatement(sql);
 			// INパラメータの設定
 			pstatement.setDate(1, SQLEndDate);
-			pstatement.setString(2, userId);
-			pstatement.setInt(3, historyId);
+			pstatement.setInt(2, orderId);
 			//SQLの発行
 			pstatement.executeUpdate();
 		} finally {

@@ -3,6 +3,7 @@ package servlet;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -52,11 +53,40 @@ public class RecordGoalServlet extends HttpServlet {
 		int historyId = Integer.parseInt(request.getParameter("historyId"));
 		try {
 			Shopping.recordGoal(userId, historyId, goal, start, goalDate);
+			String messageAboutGoal = null;
 			ArrayList<GoalBean> goals = null;
 			if(Shopping.getGoal(userId) != null){
 				goals = Shopping.getGoal(userId);
 			}
-			session.setAttribute("goal", goals);
+			if(goals != null){
+				GoalBean newestGoal = null;
+	            for(GoalBean oneOfGoal: goals){
+	                newestGoal = oneOfGoal;
+	            }
+	            LocalDate EndDate = null;
+	            if(newestGoal != null){
+	                EndDate = newestGoal.getEndDate();
+	            }
+	            if(EndDate != null){
+	                messageAboutGoal = "現在新しい目標は設定されていません";
+	            }else{
+	                LocalDate goalD = newestGoal.getGoalDate();
+	                LocalDate today = LocalDate.now();
+	                Long dayDiff = ChronoUnit.DAYS.between(today, goalD);
+	                if(dayDiff > 0){
+	                    messageAboutGoal = "目標達成予定日まで後<strong>" + dayDiff + "</storong>日";
+	                }else if(dayDiff == 0){
+	                    messageAboutGoal = "目標達成予定日は<strong>本日</strong>";
+	                }else if(dayDiff < 0){
+	                	LocalDate endDate = LocalDate.now();
+	                	Shopping.achieveGoal(userId, endDate);
+	                	messageAboutGoal = "目標達成予定日を越えました";
+	                }
+	            }
+			}else{
+				messageAboutGoal = "目標があるお買い物をはじめましょう";
+			}
+			session.setAttribute("messageAboutGoal", messageAboutGoal);
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();

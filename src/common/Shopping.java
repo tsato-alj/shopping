@@ -66,9 +66,18 @@ public class Shopping {
 		return goal;
 	}
 
-	public static void achieveGoal(String userId, int historyId, LocalDate endDate) throws ClassNotFoundException, SQLException{
+	public static void achieveGoal(String userId, LocalDate endDate) throws ClassNotFoundException, SQLException{
 		ShoppingDao dao = new ShoppingDao();
-		dao.achieveGoal(userId, historyId, endDate);
+		ArrayList<GoalBean> goals = dao.getGoal(userId);
+		GoalBean newestGoal = null;
+		for(GoalBean goal : goals){
+			newestGoal = goal;
+		}
+		int orderId;
+		if(newestGoal != null){
+			orderId = newestGoal.getOrderId();
+			dao.achieveGoal(orderId, endDate);
+		}
 		dao.close();
 	}
 }

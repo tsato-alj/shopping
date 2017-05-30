@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"
+%>
 <%@ page import="bean.LoginUserBean" %>
 
 <a href="ForVegetalian.jsp">
@@ -23,7 +24,7 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li class="active fontcoloriswhite"><a href="shopping?mode=/shopping?mode=itemList" class="navbarsbackcolor fontcoloriswhite">商品一覧 <span class="sr-only">(current)</span></a></li>
-        <li><a href="#">Category two</a></li>
+        <li><a href="viewgoal?mode=/viewgoal?mode=viewgoal">目標一覧</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
