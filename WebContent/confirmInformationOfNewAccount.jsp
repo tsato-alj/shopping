@@ -29,7 +29,7 @@
 							<p>以下の内容でよろしいでしょうか?</p>
 							<form action="resultcreateanaccount">
 								<p>アカウントID:<%=userId %><input type="hidden" name="userId" value="<%=userId %>"/></p>
-								<p>pass:<%if(pass != null && pass.equals("")){%>
+								<p>pass:<%if(pass != null && !pass.equals("")){%>
 											<%
 												for(int i = 0; i < pass.length(); i++){
 											%>
@@ -44,7 +44,7 @@
 								</p>
 								<input type="hidden" name="pass" value="<%=pass %>"/></p>
 								<p>お名前:<%=name%><input type="hidden" name="name" value="<%=name %>"/></p>
-								<p>E-mail:<%if(email != null && email.equals("")){%>
+								<p>E-mail:<%if(email != null && !email.equals("")){%>
 											<%=email %>
 										<%}else{%>
 											未設定

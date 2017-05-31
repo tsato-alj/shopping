@@ -35,7 +35,7 @@
 												<div class="form-group" >
 
 											    	<label for="pass">パスワード</label>
-											    	<p><input type="text"  class="form-control" name="pass" id="pass" value=""/></p>
+											    	<p><input type="password"  class="form-control" name="pass" id="pass" value=""/></p>
 											  	</div>
 											  	<div class="form-group">
 											    	<label for="name">お名前</label>

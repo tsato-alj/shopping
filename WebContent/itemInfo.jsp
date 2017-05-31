@@ -63,7 +63,7 @@
 					<div class="container">
 						<div class="row">
 							<div class="col-md-4">
-								<img src="<%=producerImage%>"/>
+								<img class="itemimg" src="<%=producerImage%>"/>
 							</div>
 							<div class="col-md-8">
 								<p><%=producerName %></p>
@@ -73,8 +73,6 @@
 					</div>
 					<h4 class="h4">生産者紹介</h4>
 					<p><%=userIntroduction %></p>
-					<hr/>
-					<p><%=itemDescription %></p>
 					<form action="addtocart">
 						<input type="hidden" name="itemId" value=<%= itemId %>></input>
 						<input type="hidden" name="mode" value="/addtocart?itemId=<%= itemId %>"></input>

@@ -38,3 +38,8 @@ body, html{
 textcenter{
 	text-align:center;
 }
+
+.itemimg{
+	width: 100%;
+	height: auto;
+}

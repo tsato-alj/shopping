@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		<title>ProuVege - RecordItem</title>
+		<title>VegeSel - RecordItem</title>
 		<%@ include file="head.html" %>
 		<link rel="stylesheet" type="text/css" href="header.css">
 		<link rel="stylesheet" type="text/css" href="login.css">
@@ -21,8 +21,8 @@
 				<div class="col-md-8">
 					<section id="record">
 								<div class="record-content">
-									<h3 class="h3">Record Item</h3>
-									<p>Please enter the information.</p>
+									<h3 class="h3">商品登録</h3>
+									<p>情報を入力して下さい。</p>
 								</div>
 								<div class="record-section">
 								<div class="container formlist">
@@ -31,16 +31,16 @@
 											<div class="col-md-6 form-line">
 												<div class="form-group" >
 
-											    	<label for="itemId">Brand ID</label>
+											    	<label for="itemId">商品ID</label>
 											    	<p><input type="text"  class="form-control" name="itemId" id="itemId" value="" required/></p>
 											  	</div>
 												<div class="form-group" >
 
-											    	<label for="itemName">Brand Name</label>
+											    	<label for="itemName">商品名</label>
 											    	<p><input type="text"  class="form-control" name="itemName" id="itemName" value="" required/></p>
 											  	</div>
 											  	<div class="form-group">
-											    	<label for="category">Category</label>
+											    	<label for="category">カテゴリー</label>
 											    	<select class="form-control" id="category" name="category" required>
 														<option value="Vegetable">Vegetable</option>
 														<option value="Fruit">Fruit</option>
@@ -49,7 +49,7 @@
 											    	</select>
 									  			</div>
 									  			<div class="form-group">
-											    	<label for="price">Price(&yen)</label>
+											    	<label for="price">価格(&yen)</label>
 											    	<div id="price">
 												    	<input type="number"  class="form-control" name="price" id="price" value=""/></p>
 											    	</div>
@@ -57,7 +57,7 @@
 									  		</div>
 									  		<div class="col-md-6 form-line">
 									  			<div>
-									  				<button type="submit" class="btn btn-default submit"><i class="fa fa-paper-plane" aria-hidden="true"></i>  Submit</button>
+									  				<button type="submit" class="btn btn-default submit"><i class="fa fa-paper-plane" aria-hidden="true"></i>送信</button>
 									  			</div>
 									  		</div>
 									  	</div>
