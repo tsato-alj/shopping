@@ -44,12 +44,12 @@
 	<body>
 		<%@include file="header.jsp"%>
 		<div class="container maincontent">
-			<div class="row width100margin0">
+			<div class="row width100smargin0">
 				<div class="col-md-8">
 					<h3 class="h3">商品詳細</h3>
 					<div class="row">
 						<div class="col-md-4">
-							<img src="<%=itemImage%>"/>
+							<img class="itemimg" src="<%=itemImage%>"/>
 						</div>
 						<div class="col-md-8">
 							<p><%=itemName %></p>
@@ -83,25 +83,26 @@
 						</select>
 						<input type="submit" value="カートに入れる"></input>
 					</form>
-					</div>
 					<div id="review">
 
-					<form action="review" method="post">
-				 		<p>ニックネーム: <input type="text"  name="nickname" value="" required /></p>
-						<p>評価: <select name="evaluation" required>
-										<option>1</option>
-										<option>2</option>
-										<option>3</option>
-										<option>4</option>
-										<option>5</option>
-								 </select></p>
-						<p>タイトル:<input type="text" name="title" value="" required /></p>
-						<p>内容:<br /><textarea name="contenttext" rows="10" cols="30" maxlength="200" required ></textarea></p>
+						<form action="review" method="post">
+					 		<p>ニックネーム: <input type="text"  name="nickname" value="" required /></p>
+							<p>評価: <select name="evaluation" required>
+											<option>1</option>
+											<option>2</option>
+											<option>3</option>
+											<option>4</option>
+											<option>5</option>
+									 </select></p>
+							<p>タイトル:<input type="text" name="title" value="" required /></p>
+							<p>内容:<br /><textarea name="contenttext" rows="10" cols="30" maxlength="200" required ></textarea></p>
 
-						<input type="hidden" name="itemId" value=<%= itemId %> />
-					 	<p><button type="submit">レビューする</button>
-					 	<button type="reset" name="" value="">リセット</button></p>
-					</form>
+							<input type="hidden" name="itemId" value=<%= itemId %> />
+						 	<p><button type="submit">レビューする</button>
+						 	<button type="reset" name="" value="">リセット</button></p>
+						</form>
+					</div>
+
 					<table>
 						<thead>
 							<th>タイトル</th>

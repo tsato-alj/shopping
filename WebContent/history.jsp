@@ -44,7 +44,7 @@
 							<%} %>
 						</tbody>
 					</table>
-					<p><a href="shopping"><button>一覧に戻る</button></a></p>
+					<p><a href="modechange"><button>トップページに戻る</button></a></p>
 				</div>
 				<div class="col-md-4">
 					<jsp:include page="login.jsp" />
