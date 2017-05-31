@@ -11,7 +11,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		<title>ProuVege 商品登録内容の確認</title>
+		<title>VegeSel - 商品登録内容の確認</title>
 		<%@ include file="head.html" %>
 		<link rel="stylesheet" type="text/css" href="header.css">
 		<link rel="stylesheet" type="text/css" href="login.css">

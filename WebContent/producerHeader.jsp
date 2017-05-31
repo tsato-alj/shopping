@@ -3,8 +3,8 @@
 <%@ page import="bean.LoginUserBean" %>
 
 <a href="ForVegetalian.jsp">
-	<h1 class="fontismrbedfort textcenter h1">ProuVege For Producer</h1>
-	<p class="fontismrbedfort textcenter">Proud to be Vegetalian</p>
+	<h1 class="fontismrbedfort textcenter h1">VegeSel For Producer</h1>
+	<p class="fontismrbedfort textcenter">Vegetable to Sell</p>
 </a>
 <p><a class="pull-right goto" href="modechange?vegatlianOrProducer=vegetalian">Go to "For Vegetalian"</a></p>
 <br/>

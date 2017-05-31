@@ -4,8 +4,8 @@
 <%@ page import="bean.LoginUserBean" %>
 
 <a href="ForVegetalian.jsp">
-	<h1 class="fontismrbedfort textcenter h1">ProuVege For Vegetalian</h1>
-	<p class="fontismrbedfort textcenter">Proud to be Vegetalian</p>
+	<h1 class="fontismrbedfort textcenter h1">VegeSel For Vegetalian</h1>
+	<p class="fontismrbedfort textcenter">Vegetable For Yourseleves</p>
 </a>
 <a class="fontismrbedfort pull-right goto" href="modechange?vegetalianOrProducer=producer">Go to "For Producer"</a>
 <br/>
@@ -23,7 +23,7 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active fontcoloriswhite"><a href="shopping?mode=/shopping?mode=itemList" class="navbarsbackcolor fontcoloriswhite">商品一覧 <span class="sr-only">(current)</span></a></li>
+        <li class="active fontcoloriswhite"><a href="itemlist" class="navbarsbackcolor fontcoloriswhite">商品一覧 <span class="sr-only">(current)</span></a></li>
         <li><a href="viewgoal?mode=/viewgoal?mode=viewgoal">目標一覧</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">

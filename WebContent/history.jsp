@@ -15,29 +15,43 @@
 		<style>
 			<%@include file="shopping.css" %>
 		</style>
-		<title>購入履歴</title>
+		<title>VegeSel - 購入履歴</title>
+		<%@ include file="head.html" %>
+		<link rel="stylesheet" type="text/css" href="header.css">
+		<link rel="stylesheet" type="text/css" href="login.css">
+		<link rel="stylesheet" type="text/css" href="footer.css">
+		<link rel="stylesheet" type="text/css" href="shopping.css">
 	</head>
 	<body>
-		<jsp:include page="vegetalianHeader.jsp"/>
-		<div id="main">
-			<h1><%=userName %>さんの購入確認</h1>
-			<table>
-				<thead>
-					<th>商品ID</th>
-					<th>商品名</th>
-					<th>購入数</th>
-				</thead>
-				<tbody>
-					<%for(HistoryBean history: historyList){%>
-						<tr>
-							<td><%=history.getItemId() %><td>
-							<td><%=history.getItemName() %><td>
-							<td><%=history.getItemByQuantity() %><td>
-						</tr>
-					<%} %>
-				</tbody>
-			</table>
-			<p><a href="shopping"><button>一覧に戻る</button></a></p>
+		<%@include file="header.jsp"%>
+		<div class="container maincontent">
+			<div class="row width100margin0">
+				<div class="col-md-8">
+					<h1><%=userName %>さんの購入確認</h1>
+					<table>
+						<thead>
+							<th>商品ID</th>
+							<th>商品名</th>
+							<th>購入数</th>
+						</thead>
+						<tbody>
+							<%for(HistoryBean history: historyList){%>
+								<tr>
+									<td><%=history.getItemId() %><td>
+									<td><%=history.getItemName() %><td>
+									<td><%=history.getItemByQuantity() %><td>
+								</tr>
+							<%} %>
+						</tbody>
+					</table>
+					<p><a href="shopping"><button>一覧に戻る</button></a></p>
+				</div>
+				<div class="col-md-4">
+					<jsp:include page="login.jsp" />
+				</div>
+			</div>
 		</div>
+		<%@include file="footer.html" %>
+		<%@include file="script.html" %>
 	</body>
 </html>

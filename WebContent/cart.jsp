@@ -12,7 +12,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		<title>カート</title>
+		<title>VegeSel - カート</title>
 		<%@ include file="head.html" %>
 		<link rel="stylesheet" type="text/css" href="header.css"/>
 		<link rel="stylesheet" type="text/css" href="login.css"/>
@@ -87,7 +87,7 @@
 			                        <td>   </td>
 			                        <td>   </td>
 			                        <td>
-				                       	<a href="shopping?mode=/shopping?mode=itemList">
+				                       	<a href="itemlist">
 					                        <button type="submit" class="btn btn-default">
 					                            <span class="glyphicon glyphicon-shopping-cart"></span> 買い物を続ける
 					                        </button>

@@ -8,7 +8,7 @@
 <html lang="ja">
 <head>
   <meta charset="utf-8" />
-  <title>目標設定</title>
+  <title>VegeSel - 目標設定</title>
   <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
   <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
   <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>

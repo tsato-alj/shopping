@@ -2,6 +2,7 @@ package servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -13,7 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import bean.ItemBean;
 import bean.LoginUserBean;
+import bean.ReviewBean;
 import common.Shopping;
+import dao.ReviewDao;
 
 /**
  * Servlet implementation class ItemInfo
@@ -58,6 +61,18 @@ public class ItemInfoServlet extends HttpServlet {
 			producerId = item.getItemProducerId();
 			producer = Shopping.getProducer(producerId);
 			request.setAttribute("producer", producer);
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
+
+		//review disp
+		ReviewDao review;
+		ArrayList<ReviewBean> reviews = null;
+		try{
+			review = new ReviewDao();
+			reviews = review.reviewSelect(itemId);
+			request.setAttribute("review", reviews);
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();

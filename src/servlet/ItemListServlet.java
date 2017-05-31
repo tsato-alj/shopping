@@ -41,25 +41,38 @@ public class ItemListServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		try {
-			ArrayList<ItemBean> itemBeanList = Shopping.getItem();
-			String category = request.getParameter("category");
-			if(!category.equals("All") && category != null){
-				ArrayList<ItemBean> cateList = new ArrayList<ItemBean>();
-				for(ItemBean cateItem : itemBeanList){
-					if(category.equals(cateItem.getCategory())){
-						cateList.add(cateItem);
-					}
+		try{
+			try {
+				ArrayList<ItemBean> itemBeanList = Shopping.getItem();
+
+				String category = null;
+				if(request.getParameter("category") != null){
+						category = request.getParameter("category");
 				}
-				itemBeanList = cateList;
+				if(category != null && !category.equals("All")){
+					ArrayList<ItemBean> cateList = new ArrayList<ItemBean>();
+					for(ItemBean cateItem : itemBeanList){
+						if(category.equals(cateItem.getCategory())){
+							cateList.add(cateItem);
+						}
+					}
+					itemBeanList = cateList;
+				}
+				request.setAttribute("itemBeanList", itemBeanList);
+				ServletContext context = getServletContext();
+				RequestDispatcher rd = context.getRequestDispatcher("/itemList.jsp");
+				rd.forward(request, response);
+			} catch (ClassNotFoundException | SQLException e) {
+				// TODO 自動生成された catch ブロック
+				e.printStackTrace();
 			}
-			request.setAttribute("itemBeanList", itemBeanList);
-			ServletContext context = getServletContext();
-			RequestDispatcher rd = context.getRequestDispatcher("/itemList.jsp");
-			rd.forward(request, response);
-		} catch (ClassNotFoundException | SQLException e) {
-			// TODO 自動生成された catch ブロック
+		}catch(ServletException e){
+			System.out.println("ServletException");
+			e.getRootCause().printStackTrace();
+		}catch(IOException e){
+			System.out.println("IOEException");
 			e.printStackTrace();
 		}
 	}
+
 }

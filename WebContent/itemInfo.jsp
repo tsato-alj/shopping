@@ -4,6 +4,8 @@
 <%@ page import="bean.ItemBean"%>
 <%@ page import="bean.LoginUserBean"%>
 <%@ page import="java.net.URLEncoder"%>
+<%@ page import="java.util.ArrayList"%>
+<%@ page import="bean.ReviewBean"%>
 <%
  	ItemBean item = (ItemBean)request.getAttribute("item");
 	String itemId = item.getItemId();
@@ -21,13 +23,17 @@
 	String producerImage = producer.getImage();
 	String userIntroduction = producer.getUserIntroduction();
 
+	ArrayList<ReviewBean> reviews = null;
+	if(request.getAttribute("review") != null){
+		reviews = (ArrayList<ReviewBean>)request.getAttribute("review");
+	}
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		<title><%=itemName %></title>
+		<title>VegeSel - <%=itemName %></title>
 		<%@ include file="head.html" %>
 		<link rel="stylesheet" type="text/css" href="header.css"/>
 		<link rel="stylesheet" type="text/css" href="login.css"/>
@@ -54,13 +60,15 @@
 					<h4 class="h4">商品説明</h4>
 					<p><%=itemDescription %></p>
 					<h3 class="h3">生産者について</h3>
-					<div class="row">
-						<div class="col-md-4">
-							<img src="<%=producerImage%>"/>
-						</div>
-						<div class="col-md-8">
-							<p><%=producerName %></p>
-							<p><%=address %></p>
+					<div class="container">
+						<div class="row">
+							<div class="col-md-4">
+								<img src="<%=producerImage%>"/>
+							</div>
+							<div class="col-md-8">
+								<p><%=producerName %></p>
+								<p><%=address %></p>
+							</div>
 						</div>
 					</div>
 					<h4 class="h4">生産者紹介</h4>
@@ -77,6 +85,49 @@
 						</select>
 						<input type="submit" value="カートに入れる"></input>
 					</form>
+					</div>
+					<div id="review">
+
+					<form action="review" method="post">
+				 		<p>ニックネーム: <input type="text"  name="nickname" value="" required /></p>
+						<p>評価: <select name="evaluation" required>
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+										<option>4</option>
+										<option>5</option>
+								 </select></p>
+						<p>タイトル:<input type="text" name="title" value="" required /></p>
+						<p>内容:<br /><textarea name="contenttext" rows="10" cols="30" maxlength="200" required ></textarea></p>
+
+						<input type="hidden" name="itemId" value=<%= itemId %> />
+					 	<p><button type="submit">レビューする</button>
+					 	<button type="reset" name="" value="">リセット</button></p>
+					</form>
+					<table>
+						<thead>
+							<th>タイトル</th>
+							<th>ニックネーム</th>
+							<th>コメント</th>
+							<th>評価</th>
+							<th>投稿日時</th>
+						</thead>
+						<tbody>
+						<%
+							if(reviews != null){
+								for(ReviewBean review: reviews){
+						%>
+									<td><%=review.getTitle() %></td>
+									<td><%=review.getNickname() %></td>
+									<td><%=review.getComent() %></td>
+									<td><%=review.getEvaluation() %></td>
+									<td><%=review.getContribution_time() %></td>
+						<%
+								}
+							}
+						%>
+						</tbody>
+					</table>
 				</div>
 				<div class="col-md-4">
 					<jsp:include page="login.jsp" />

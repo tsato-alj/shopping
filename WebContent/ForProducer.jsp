@@ -8,7 +8,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		<title>ProuVege For Producer</title>
+		<title>VegeSel - For Producer</title>
 		<%@ include file="head.html" %>
 		<link rel="stylesheet" type="text/css" href="header.css">
 		<link rel="stylesheet" type="text/css" href="login.css">
@@ -28,4 +28,5 @@
 			</div>
 		</div>
 		<%@include file="footer.html" %>
+		<%@include file="script.html" %>
 </html>

@@ -16,7 +16,7 @@
 	<style>
 		<%@include file="shopping.css" %>
 	</style>
-	<title>購入確認</title>
+	<title>VegeSel - 購入確認</title>
 	</head>
 	<body>
 		<%@include file="header.jsp"%>
